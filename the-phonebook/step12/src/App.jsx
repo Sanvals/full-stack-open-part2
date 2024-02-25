@@ -48,7 +48,7 @@ const App = () => {
         .create(nameObject)
         .then(res => {
           // console.log(res)
-          setErrorMessage(`${newName} has been successfully added`)
+          setErrorMessage(`Success: ${newName} has been added`)
           setTimeout(() => {
             setErrorMessage(null)
           }, 2000)
@@ -62,11 +62,17 @@ const App = () => {
         .then(res => {
           // console.log(res)
           setPersons(persons.map(p => p.name === newName ? { ...p, number: newNumber } : p))
-          setErrorMessage(`${newName}'s number has been successfully changed`)
+          setErrorMessage(`Success: ${newName}'s number is changed`)
           setTimeout(() => {
             setErrorMessage(null)
           }, 2000)  
         
+        })
+        .catch(error => {
+          setErrorMessage(`Error: ${newName}'s info has been deleted`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2000);
         })
       }
     }
@@ -84,7 +90,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-        <Notification message={errorMessage}/>
+        <Notification 
+          message={errorMessage} 
+          alertMode={errorMessage && errorMessage.includes('Success') ? 'noError' : 'error'}/>
         <NewInput text="filter shown with" onChange={handleSearchChange}/>
       <h2>add a new</h2>
       <form onSubmit={addName}>
