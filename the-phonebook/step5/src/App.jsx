@@ -1,34 +1,6 @@
 import { useState } from 'react'
-
-const People = ({id, name, number}) => {
-  // console.log(id, name, number)
-  return (
-    <>
-    <div>{name}: {number}</div>
-    </>
-  )
-}
-
-const FilteredPeople = ({content, search}) => {
-  // console.log(content, search)
-  const filteredArray = content.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
-  return (
-    <>
-    {
-    filteredArray.map(item => <People key={item.id} name={item.name} number={item.number}/>)
-    }
-    </>
-  )
-}
-
-const NewInput = ({text, onChange}) => {
-  // console.log(text, handler)
-  return (
-    <div>
-      {text}: <input onChange={onChange}/>
-    </div>
-  )
-}
+import FilteredPeople from './components/FilteredPeople'
+import NewInput from './components/NewInput'
 
 const App = () => {
   const [newName, setNewName] = useState('')
